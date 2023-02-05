@@ -1,0 +1,8 @@
+[user]
+  name = Michael Lehmann
+  email = mplehmann@outlook.com
+[alias]
+  ls = log --online
+[init]
+  defaultBranch = main
+
