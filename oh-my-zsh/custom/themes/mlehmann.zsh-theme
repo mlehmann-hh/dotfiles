@@ -55,6 +55,10 @@ mlehmann_line_spacer() {
 mlehmann_node_prompt() {
   local node_version
 
+  if (( ${+MLEHMANN_THEME_NODE_PROMPT_DISABLED} )); then
+    return
+  fi
+
   if mlehmann_exists nvm; then
     node_version=$(nvm current 2> /dev/null)
   fi
@@ -69,13 +73,19 @@ mlehmann_node_prompt() {
 
   node_version="$(echo "$node_version" | awk -F '[v.]' '{ print $2 "." $3 }')"
 
-  echo "${MLEHMANN_THEME_NODE_PROMPT_PREFIX}${node_version}${MLEHMANN_THEME_NODE_PROMPT_SUFFIX}"
+  if [[ -n ${node_version} ]]; then
+    echo "${MLEHMANN_THEME_NODE_PROMPT_PREFIX}${node_version}${MLEHMANN_THEME_NODE_PROMPT_SUFFIX}"
+  else
+    return
+  fi
 }
 
 mlehmann_python_prompt() {
   local python_version
 
-  if mlehmann_exists python; then
+  if (( ${+MLEHMANN_THEME_PYTHON_PROMPT_DISABLED} )); then
+    return
+  elif mlehmann_exists python; then
     python_version="$(python -V)"
   elif mlehmann_exists python3; then
     python_version="$(python3 -V)"
@@ -90,13 +100,19 @@ mlehmann_python_prompt() {
     venv_name=" ($(basename "$VIRTUAL_ENV" ))"
   fi
 
-  echo "${MLEHMANN_THEME_PYTHON_PROMPT_PREFIX}${python_version}${venv_name}${MLEHMANN_THEME_PYTHON_PROMPT_SUFFIX}"
+  if [[ -n ${python_version} ]]; then
+    echo "${MLEHMANN_THEME_PYTHON_PROMPT_PREFIX}${python_version}${venv_name}${MLEHMANN_THEME_PYTHON_PROMPT_SUFFIX}"
+  else
+    return
+  fi
 }
 
 mlehmann_java_prompt() {
   local java_version
 
-  if mlehmann_exists java; then
+  if (( ${+MLEHMANN_THEME_JAVA_PROMPT_DISABLED} )); then
+    return
+  elif mlehmann_exists java; then
     java_version="$(java -version 2>&1 | head -n 1)"
   else
     return
@@ -104,26 +120,36 @@ mlehmann_java_prompt() {
 
   local major_version="$(echo "$java_version" | awk -F '["_.]' '{ print $2 }')"
   local minor_version="$(echo "$java_version" | awk -F '["_.]' '{ print $3 }')"
-  
+
   if [[ "$major_version" == "1" ]]; then
     java_version="${major_version}.${minor_version}"
   else
     java_version="${major_version}"
   fi
 
-  echo "${MLEHMANN_THEME_JAVA_PROMPT_PREFIX}${java_version}${MLEHMANN_THEME_JAVA_PROMPT_SUFFIX}"
+  if [[ -n ${java_version} ]]; then
+    echo "${MLEHMANN_THEME_JAVA_PROMPT_PREFIX}${java_version}${MLEHMANN_THEME_JAVA_PROMPT_SUFFIX}"
+  else
+    return
+  fi
 }
 
 mlehmann_kube_prompt() {
   local kube_context
 
-  if mlehmann_exists kubectl; then
-    kube_context="$(kubectl config current-context)"
+  if (( ${+MLEHMANN_THEME_K8S_PROMPT_DISABLED} )); then
+    return
+  elif mlehmann_exists kubectl; then
+    kube_context="$(kubectl config current-context 2> /dev/null)"
   else
     return
   fi
 
-  echo "${MLEHMANN_THEME_K8S_PROMPT_PREFIX}${kube_context}${MLEHMANN_THEME_K8S_PROMPT_SUFFIX}"
+  if [[ -n ${kube_context} ]]; then
+    echo "${MLEHMANN_THEME_K8S_PROMPT_PREFIX}${kube_context}${MLEHMANN_THEME_K8S_PROMPT_SUFFIX}"
+  else
+    return
+  fi
 }
 
 mlehmann_line1_prompt() {
