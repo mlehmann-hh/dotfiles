@@ -2,7 +2,7 @@
   name = Michael Lehmann
   email = mplehmann@outlook.com
 [alias]
-  ls = log --online
+  ls = log --oneline
 [init]
   defaultBranch = main
 
