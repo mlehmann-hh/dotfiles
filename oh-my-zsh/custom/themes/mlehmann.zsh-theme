@@ -174,7 +174,7 @@ mlehmann_line2_prompt_left() {
 }
 
 mlehmann_line2_prompt_right() {
-  echo "%D{%R} "
+  echo " %D{%R} "
 }
 
 mlehmann_line3_prompt_left() {
