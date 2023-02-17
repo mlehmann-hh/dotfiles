@@ -1,6 +1,3 @@
-[user]
-  name = Michael Lehmann
-  email = mplehmann@outlook.com
 [alias]
   ls = log --oneline
 [init]
