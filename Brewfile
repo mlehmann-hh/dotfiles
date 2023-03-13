@@ -12,19 +12,17 @@ brew "azure-cli"
 brew "bash"
 brew "bat"
 brew "cloc"
-brew "coreutils"
 brew "dua-cli"
 brew "duf"
 brew "exa"
 brew "findutils"
 brew "fortune"
+brew "fzf"
 brew "gh"
 brew "git"
-brew "git-flow"
 brew "gnu-sed"
 brew "gnupg"
 brew "go"
-brew "openjdk@17"
 brew "gradle"
 brew "grep"
 brew "helm"
@@ -47,7 +45,6 @@ brew "pwgen"
 brew "pylint", link: false
 brew "python@3.8"
 brew "python@3.9"
-brew "ruby"
 brew "sbt"
 brew "scala"
 brew "scc"
@@ -68,11 +65,9 @@ brew "mulesoft-labs/data-weave/dw"
 cask "1password"
 cask "azure-data-studio"
 cask "bartender"
-cask "cyberduck"
 cask "discord"
 cask "docker"
 cask "dotnet-sdk"
-cask "eclipse-java"
 cask "firefox"
 cask "font-bitstream-vera-sans-mono-nerd-font"
 cask "font-blex-mono-nerd-font"
@@ -93,24 +88,22 @@ cask "microsoft-azure-storage-explorer"
 cask "microsoft-edge"
 cask "microsoft-office"
 cask "microsoft-teams"
+cask "obsidian"
 cask "openemu"
+cask "parallels"
 cask "plex"
 cask "postman"
 cask "powershell"
 cask "rectangle"
 cask "retroarch"
-cask "spotify"
 cask "steam"
 cask "visual-studio-code"
-mas "1Password for Safari", id: 1569813296
-mas "AdGuard for Safari", id: 1440147259
-mas "Affinity Designer", id: 824171161
+cask "zulu8"
 mas "Affinity Designer 2", id: 1616831348
 mas "Affinity Photo 2", id: 1616822987
 mas "Affinity Publisher 2", id: 1606941598
 mas "Cyberduck", id: 409222199
 mas "Dropover", id: 1355679052
-mas "GarageBand", id: 682658836
 mas "Home Inventory", id: 413564952
 mas "iA Writer", id: 775737590
 mas "iMovie", id: 408981434
@@ -118,6 +111,7 @@ mas "Jira", id: 1475897096
 mas "Keynote", id: 409183694
 mas "Kindle", id: 405399194
 mas "Microsoft OneNote", id: 784801555
+mas "Microsoft Remote Desktop", id: 1295203466
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Patterned", id: 1451427346
