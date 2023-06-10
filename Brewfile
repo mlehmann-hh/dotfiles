@@ -8,6 +8,7 @@ tap "homebrew/core"
 tap "homebrew/services"
 tap "microsoft/mssql-release"
 tap "mulesoft-labs/data-weave"
+tap "isen-ng/dotnet-sdk-versions"
 brew "ansible"
 brew "azure-cli"
 brew "bash"
@@ -103,6 +104,7 @@ cask "rectangle"
 cask "steam"
 cask "visual-studio-code"
 cask "zulu8"
+cask "isen-ng/dotnet-sdk-versions/dotnet-sdk6-0-400"
 mas "Affinity Designer 2", id: 1616831348
 mas "Affinity Photo 2", id: 1616822987
 mas "Affinity Publisher 2", id: 1606941598
