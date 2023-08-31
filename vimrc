@@ -10,7 +10,7 @@ set autoread
 set backspace=indent,eol,start
 set backupdir=/tmp//,.
 
-if system('uname -s') == "Darwin\n"
+if has("osx")
   set clipboard=unnamed
 else
   set clipboard=unnamedplus
