@@ -4,142 +4,245 @@ version: 2
 final_space: true
 
 palette:
-  black: "#282c34"
-  red: "#e06c75"
-  green: "#98c379"
-  yellow: "#e5c07b"
-  blue: "#61afef"
-  magenta: "#c678dd"
-  cyan: "#56b6c2"
-  white: "#dcdfe4"
-  foreground: "p:white"
-  background: "p:black"
+  black: black
+  red: red
+  green: green
+  yellow: yellow
+  blue: blue
+  magenta: magenta
+  cyan: cyan
+  white: white
+  foreground: p:white
+  background: transparent
 
 blocks:
   - type: prompt
-    newline: true
     alignment: left
+    newline: true
     segments:
-      - type: battery
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
-      - type: time
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
-        foreground: "p:blue"
+      - type: text
+        style: plain
+        template: ╭─
+      - type: os
+        style: plain
+        foreground: p:white
+        template: " {{ if .WSL }}WSL at {{ end }}{{.Icon}} 󰇝"
+      - type: session
+        style: plain
+        foreground: p:white
+        template: "{{ if .SSHSession }}  {{ end }}{{ if .Root }}<p:red></> {{ end }}{{ .UserName }}{{ if .SSHSession }}@{{ .HostName }}{{ end }} "
+
+  - type: prompt
+    alignment: right
+    filler: ─
+    segments:
+      - type: kubectl
+        style: powerline
+        powerline_symbol: ─
+        invert_powerline: true
+        foreground: p:white
+        template: " 󱃾 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
+      - type: project
+        style: powerline
+        powerline_symbol: ─
+        invert_powerline: true
+        foreground: p:white
+      - type: node
+        style: powerline
+        powerline_symbol: ─
+        invert_powerline: true
+        foreground: p:white
+        template: "  {{ .Full }} "
         properties:
-          time_format: "15:04:05"
+          fetch_package_manager: true
+          display_mode: context
+      - type: python
+        style: powerline
+        powerline_symbol: ─
+        invert_powerline: true
+        foreground: p:white
+        template: "  {{ .Full }} "
+        properties:
+          display_mode: context
+          fetch_version: true
+          fetch_virtual_env: true
       - type: dotnet
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
+        style: powerline
+        powerline_symbol: ─
+        invert_powerline: true
+        foreground: p:white
         template: "  {{ .Full }} "
         properties:
-          display_mode: files
+          display_mode: context
+      - type: java
+        style: powerline
+        powerline_symbol: ─
+        invert_powerline: true
+        foreground: p:white
+        template: "  {{ .Full }}"
+        properties:
+          display_mode: context
+      - type: text
+        style: plain
+        template: ╮
+
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - type: text
+        style: plain
+        template: "│ "
       - type: path
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
-        foreground: "p:magenta"
+        style: plain
+        foreground: p:white
         template: " {{ .Path }} "
         properties:
           folder_separator_icon: /
           home_icon: " "
-          folder_icon: ...
-          style: mixed
-          mixed_threshold: 8
+          style: full
           mapped_locations:
             "~/source": " "
+
+  - type: prompt
+    alignment: right
+    segments:
+      - type: time
+        style: plain
+        foreground: p:white
+        template: " {{ .CurrentDate | date .Format }}"
+        properties:
+          time_format: "15:04"
+      - type: text
+        style: plain
+        template: " ─┤"
+
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - type: text
+        style: plain
+        template: ╰─
+      - type: status
+        style: plain
+        foreground: p:red
+        template: "{{ if .Error }}✘{{ end }}"
+      - type: text
+        style: plain
+        foreground: "p:white"
+        template: 
+
+  - type: rprompt
+    alignment: right
+    segments:
       - type: git
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
-        foreground: "p:blue"
-        template: " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }} "
+        style: plain
+        foreground: p:white
+        template: " {{ .UpstreamIcon }} {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }} "
         properties:
           fetch_upstream_icon: true
-      - type: os
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
-        foreground: "p:blue"
-      - type: java
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
-        foreground: "p:blue"
-        template: "  {{ .Full }}"
-        properties:
-          display_mode: always
-      - type: kubectl
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
-        foreground: "p:blue"
-        template: " 󱃾 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
-      - type: node
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
-        foreground: "p:blue"
-        template: "  {{ .Full }} "
-        properties:
-          fetch_package_manager: true
-          display_mode: always
-      - type: python
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
-        foreground: "p:blue"
-        template: "  {{ .Full }} "
-        properties:
-          display_mode: always
-          fetch_version: true
-          fetch_virtual_env: true
-      - type: root
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
-        foreground: "p:blue"
-        template: 
-      - type: session
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
-        foreground: "p:yellow"
-        templates:
-          - "{{ if .SSHSession }} {{ end }}"
-          - "{{ if .Root }}<p:red></> {{ end }}{{ .UserName }}"
-          - "{{ if .SSHSession }}@{{ .HostName }}{{ end }}"
-        templates_logic: join
-      - type: shell
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
-        foreground: "p:yellow"
-      - type: status
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
-        foreground: "p:green"
-        foreground_templates:
-          - "{{ if .Error }}p.red{{ end }}"
-        template: "{{ if .Error }}{{ else }}󰗡{{ end }}"
-        properties:
-          always_enabled: true
-      - type: sysinfo
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
-        foreground: "p:magenta"
-        template: "  {{ round .PhysicalPercentUsed .Precision }}% "
-        properties:
-          precision: 2
-      - type: project
-        style: diamond
-        leading_diamond: "<"
-        trailing_diamond: ">"
-        foreground: "p:cyan"
-        
+          fetch_status: true
+      - type: text
+        style: plain
+        template: ─╯
+
+transient_prompt:
+  template: "──   {{ now | date \"15:04\" }} ── {{ .PWD }} ──\n"
+
+  # - type: prompt
+  #   newline: true
+  #   alignment: left
+  #   segments:
+  #     - type: battery
+  #       style: diamond
+  #       leading_diamond: "<"
+  #       trailing_diamond: ">"
+  #     - type: time
+  #       style: diamond
+  #       leading_diamond: "<"
+  #       trailing_diamond: ">"
+  #       foreground: "p:blue"
+  #       properties:
+  #         time_format: "15:04:05"
+  #     - type: dotnet
+  #       style: diamond
+  #       leading_diamond: "<"
+  #       trailing_diamond: ">"
+  #       template: "  {{ .Full }} "
+  #       properties:
+  #         display_mode: files
+  #     - type: path
+  #       style: diamond
+  #       leading_diamond: "<"
+  #       trailing_diamond: ">"
+  #       foreground: "p:magenta"
+  #       template: " {{ .Path }} "
+  #       properties:
+  #         folder_separator_icon: /
+  #         home_icon: " "
+  #         folder_icon: ...
+  #         style: mixed
+  #         mixed_threshold: 8
+  #         mapped_locations:
+  #           "~/source": " "
+  #     - type: git
+  #       style: diamond
+  #       leading_diamond: "<"
+  #       trailing_diamond: ">"
+  #       foreground: "p:blue"
+  #       template: " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }} "
+  #       properties:
+  #         fetch_upstream_icon: true
+  #     - type: java
+  #       style: diamond
+  #       leading_diamond: "<"
+  #       trailing_diamond: ">"
+  #       foreground: "p:blue"
+  #       template: "  {{ .Full }}"
+  #       properties:
+  #         display_mode: always
+  #     - type: kubectl
+  #       style: diamond
+  #       leading_diamond: "<"
+  #       trailing_diamond: ">"
+  #       foreground: "p:blue"
+  #       template: " 󱃾 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
+  #     - type: node
+  #       style: diamond
+  #       leading_diamond: "<"
+  #       trailing_diamond: ">"
+  #       foreground: "p:blue"
+  #       template: "  {{ .Full }} "
+  #       properties:
+  #         fetch_package_manager: true
+  #         display_mode: always
+  #     - type: python
+  #       style: diamond
+  #       leading_diamond: "<"
+  #       trailing_diamond: ">"
+  #       foreground: "p:blue"
+  #       template: "  {{ .Full }} "
+  #       properties:
+  #         display_mode: always
+  #         fetch_version: true
+  #         fetch_virtual_env: true
+  #     - type: root
+  #       style: diamond
+  #       leading_diamond: "<"
+  #       trailing_diamond: ">"
+  #       foreground: "p:blue"
+  #       template: 
+  #     - type: shell
+  #       style: diamond
+  #       leading_diamond: "<"
+  #       trailing_diamond: ">"
+  #       foreground: "p:yellow"
+  #     - type: sysinfo
+  #       style: diamond
+  #       leading_diamond: "<"
+  #       trailing_diamond: ">"
+  #       foreground: "p:magenta"
+  #       template: "  {{ round .PhysicalPercentUsed .Precision }}% "
+  #       properties:
+  #         precision: 2
