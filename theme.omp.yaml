@@ -1,0 +1,179 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+version: 2
+final_space: true
+
+palette:
+  foreground: p:white
+  background: transparent
+  orange: "#ff6f00"
+  blue: "#4285f4"
+  magenta: magenta
+  cyan: cyan
+  violet: "#4940ff"
+  slate: "#29315a"
+
+  # HTML Named Colors
+  lightSteelBlue: "#b0c4de"
+  cornflowerBlue: "#6495ed"
+  lightSlateGray: "#778899"
+  darkViolet: "#9400d3"
+  royalBlue: "#4169e1"
+  darkOrange: "#ff8c00"
+  green: "#008000"
+  darkGreen: "#006400"
+  yellow: "#ffff00"
+  crimson: "#dc143c"
+  red: "#ff0000"
+  black: "#000000"
+  white: "#ffffff"
+  darkGray: "#a9a9a9"
+  teal: "#008080"
+  darkCyan: "#008b8b"
+
+blocks:
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - type: text
+        style: plain
+        template: ╭─
+      - type: os
+        style: plain
+        template: " {{ if .WSL }}WSL at {{ end }}{{.Icon}} ⋮ "
+      - type: session
+        style: plain
+        foreground: p:teal
+        template: "{{ if .SSHSession }}<p:white> </> {{ end }}{{ if .Root }}<p:red></> {{ end }}{{ .UserName }}{{ if .SSHSession }}@{{ .HostName }}{{ end }} "
+
+  - type: prompt
+    alignment: right
+    filler: ─
+    segments:
+      - type: kubectl
+        style: powerline
+        powerline_symbol: ─
+        invert_powerline: true
+        foreground: p:royalBlue
+        template: " <p:white>󱃾</> {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
+      - type: project
+        style: powerline
+        powerline_symbol: ─
+        invert_powerline: true
+        foreground: p:cornflowerBlue
+        templates:
+          - " <p:white></> "
+          - "{{ if .Version }}{{.Version}} {{ end }}"
+          - "{{ if .Name }}{{ .Name }} {{ end }}"
+          - "{{ if .Target }}<p:white>󰣉</> {{ .Target }} {{ end }}"
+        templates_logic: join
+      - type: node
+        style: powerline
+        powerline_symbol: ─
+        invert_powerline: true
+        foreground: p:darkGreen
+        template: " <p:white></> {{ .Full }} "
+        properties:
+          fetch_package_manager: true
+          display_mode: context
+      - type: python
+        style: powerline
+        powerline_symbol: ─
+        invert_powerline: true
+        foreground: p:yellow
+        template: " <p:white></> {{ .Full }} "
+        properties:
+          display_mode: context
+          fetch_version: true
+          fetch_virtual_env: true
+      - type: dotnet
+        style: powerline
+        powerline_symbol: ─
+        invert_powerline: true
+        foreground: p:darkViolet
+        template: " <p:white></> {{ .Full }} "
+        properties:
+          display_mode: context
+      - type: java
+        style: powerline
+        powerline_symbol: ─
+        invert_powerline: true
+        foreground: p:darkOrange
+        template: " <p:white></> {{ .Full }}"
+        properties:
+          display_mode: context
+      - type: text
+        style: plain
+        template: ╮
+
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - type: text
+        style: plain
+        template: "│ "
+      - type: path
+        style: plain
+        foreground: p:lightSlateGray
+        template: " {{ .Path }} "
+        properties:
+          folder_separator_icon: /
+          home_icon: " "
+          style: full
+          mapped_locations:
+            "~/source": " "
+
+  - type: prompt
+    alignment: right
+    segments:
+      - type: time
+        style: plain
+        foreground: p:lightSlateGray
+        template: " {{ .CurrentDate | date .Format }}"
+        properties:
+          time_format: "15:04"
+      - type: text
+        style: plain
+        template: " ─╯"
+
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - type: text
+        style: plain
+        template: ╰─
+      - type: status
+        style: plain
+        foreground: p:red
+        template: "{{ if .Error }} ✘ {{ end }}"
+      - type: text
+        style: plain
+        template: 
+
+  - type: rprompt
+    alignment: right
+    segments:
+      - type: git
+        style: plain
+        foreground: p:teal
+        templates: 
+          - "<p:white>{{ .UpstreamIcon }}</> {{ .HEAD }} "
+          - "{{if .BranchStatus }}{{ .BranchStatus }} {{ end }}"
+          - "{{ if .Working.Changed }} {{ .Working.String }} {{ end }}"
+          - "{{ if and (.Working.Changed) (.Staging.Changed) }}| {{ end }}"
+          - "{{ if .Staging.Changed }} {{ .Staging.String }} {{ end }}"
+          - "{{ if gt .StashCount 0 }}󰆓 {{ .StashCount }} {{ end }} "
+        properties:
+          fetch_upstream_icon: true
+          fetch_status: true
+          branch_icon: ""
+          github_icon: 
+          tag_icon: " "
+          commit_icon: " "
+
+transient_prompt:
+  foreground: p:lightSlateGray
+  template: "\n──  {{ now | date \"15:04\" }} ── {{ .PWD }} ──\n"
