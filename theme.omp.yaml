@@ -110,7 +110,7 @@ blocks:
       - type: time
         style: plain
         foreground: p:white
-        template: " {{ .CurrentDate | date .Format }}"
+        template: " {{ .CurrentDate | date .Format }}"
         properties:
           time_format: "15:04"
       - type: text
@@ -127,10 +127,10 @@ blocks:
       - type: status
         style: plain
         foreground: p:red
-        template: "{{ if .Error }}✘{{ end }}"
+        template: "{{ if .Error }} ✘ {{ end }}"
       - type: text
         style: plain
-        foreground: "p:white"
+        foreground: p:white
         template: 
 
   - type: rprompt
@@ -150,4 +150,4 @@ blocks:
 
 transient_prompt:
   foreground: p:cyan
-  template: "\n──   {{ now | date \"15:04\" }} ── {{ .PWD }} ──\n"
+  template: "\n──  {{ now | date \"15:04\" }} ── {{ .PWD }} ──\n"
