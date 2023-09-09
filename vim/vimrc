@@ -1,8 +1,17 @@
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
+" Features and flags not supported in Neovim
+if !has("nvim")
+  python3 from powerline.vim import setup as powerline_setup
+  python3 powerline_setup()
+  python3 del powerline_setup
 
-colorscheme desert
+  set cryptmethod=blowfish2
+  set ttymouse=sgr
+endif
+
+let g:airline_powerline_fonts = 1
+let g:airline_theme = luna
+
+colorscheme slate
 syntax on
 
 set autoindent
@@ -18,7 +27,6 @@ endif
 
 " set complete-=i
 set completeopt=menuone,preview
-set cryptmethod=blowfish2
 set directory=/tmp//,.
 set encoding=utf-8
 set expandtab
@@ -53,7 +61,6 @@ set splitright
 set tabstop=2
 set textwidth=0
 set ttimeout
-set ttymouse=sgr
 set undodir=/tmp//,.
 set virtualedit=block
 set visualbell t_vb=
