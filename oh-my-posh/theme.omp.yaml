@@ -6,12 +6,6 @@ final_space: true
 palette:
   foreground: p:white
   background: transparent
-  orange: "#ff6f00"
-  blue: "#4285f4"
-  magenta: magenta
-  cyan: cyan
-  violet: "#4940ff"
-  slate: "#29315a"
 
   # HTML Named Colors
   lightSteelBlue: "#b0c4de"
