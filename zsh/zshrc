@@ -3,8 +3,6 @@ if [[ -f "$XDG_CONFIG_HOME/dircolors/dircolors" ]]; then
     eval $(dircolors "$XDG_CONFIG_HOME/dircolors/dircolors")
   elif (( $+commands[gdircolors] )); then
     eval $(gdircolors "$XDG_CONFIG_HOME/dircolors/dircolors")
-  else
-    echo "Didn't find a dircolors command"
   fi
 fi
 
@@ -40,7 +38,14 @@ function java-change() {
 alias ponyfortune="fortune | ponysay -b unicode"
 alias ponyquote="ponysay -b unicode -q"
 alias pwgen-sec="pwgen -scnyB 20 1"
-alias vim="nvim"
+
+if (( $+commands[nvim] )); then
+  alias vim="nvim"
+fi
+
+if (( $+commands[gls])); then
+  alias ls="gls --color=auto"
+fi
 
 if (( $+commands[duf] )); then
   alias dfh="duf"
