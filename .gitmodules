@@ -4,3 +4,6 @@
 [submodule "nvim/pack/dist/start/vim-airline-themes"]
 	path = nvim/pack/dist/start/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
+[submodule "dircolors/dircolors-solarized"]
+	path = dircolors/dircolors-solarized
+	url = https://github.com/seebi/dircolors-solarized
