@@ -1,3 +1,5 @@
+export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.dotnet/tools:/opt/homebrew/opt/openssl@1.1/bin:$PATH"
+
 dircolorsFile="$XDG_CONFIG_HOME/dircolors/dircolors-solarized/dircolors.256dark"
 if [[ -f "$dircolorsFile" ]]; then
   if (( $+commands[dircolors] )); then

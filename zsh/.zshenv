@@ -1,4 +1,4 @@
-export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.dotnet/tools:/opt/homebrew/opt/openssl@1.1/bin:$PATH"
+# export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.dotnet/tools:/opt/homebrew/opt/openssl@1.1/bin:$PATH"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
