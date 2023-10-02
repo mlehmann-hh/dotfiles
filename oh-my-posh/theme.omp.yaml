@@ -76,7 +76,7 @@ blocks:
         powerline_symbol: ─
         invert_powerline: true
         foreground: p:yellow
-        template: " <p:white></> {{ .Full }} "
+        template: " <p:white></> {{ if .Venv }}({{ .Venv }}) {{end }}{{ .Full }} "
         properties:
           display_mode: context
           fetch_version: true
